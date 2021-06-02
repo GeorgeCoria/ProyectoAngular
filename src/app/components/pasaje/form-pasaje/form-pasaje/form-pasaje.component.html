@@ -1,0 +1,107 @@
+<div class="row justify-content-center">
+    <div class="row justify-content-center text-center">
+        <div class="col-12 col-md-8  mt-4 mb-4 border-primary border-5 border-top border-bottom">
+                <h1>ALTA DE PASAJES </h1>
+            </div>
+    </div>
+    <form class="col-12 col-md-8 col-lg-6" #sectorPasaje="ngForm">
+        <div class="mb-3">
+            <label for="fecha" class="form-label ">Fecha </label>
+            <input type="date" name="fechaCompra" [(ngModel)]="pasaje.fechaCompra" id="fecha" required
+                #inFecha="ngModel">
+            <div *ngIf="inFecha.invalid  && (inFecha.touched || inFecha.dirty)">
+                <p class="alert alert-danger">El campo no puede estar vacio</p>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label for="precio" class="form-label">Precio</label>
+            <input  type="number" class="form-control" id="precio" name="precio" [(ngModel)]="precio"
+                aria-describedby="emailHelp" required #inPrecio="ngModel" >
+            <div *ngIf="inPrecio.invalid  && (inPrecio.touched || inPrecio.dirty)">
+                <p class="alert alert-danger">El campo no puede estar vacio</p>
+            </div>
+            <p>Precio total {{pasaje.precioPasaje}}</p>
+        </div>
+
+        <div class="mb-3">
+            <label for="" class="form-label">Categoria</label>
+            <select [disabled]="inPrecio.invalid" class="form-select" name="categoria" [(ngModel)]="pasaje.categoriaPasajero"
+                aria-label="Default select example" (ngModelChange)="calcularPrecio()" required #inCategoria="ngModel">
+                <option value="Menor">Menor</option>
+                <option value="Adulto">Adulto</option>
+                <option value="Jubilado">Jubilado</option>
+            </select>
+            <div *ngIf="inCategoria.invalid  && (inCategoria.touched || inCategoria.dirty)">
+                <p class="alert alert-danger">El campo no puede estar vacio</p>
+            </div>
+        </div>
+
+        <div class="mb-3" *ngIf="inCategoria.valid">
+            <label for="precio" class="form-label">Precio Total</label>
+            <p class="bg-info fs-4 text-white p-3">Precio total $ {{pasaje.precioPasaje}}</p>
+        </div>
+
+        <div class="row">
+            <div class="col-auto">
+                <input type="text" class="form-control" placeholder="DNI" name="nro_documento"
+                    [(ngModel)]="persona.nro_documento" required>
+            </div>
+            <div *ngIf="editMode==false" class="col-auto">
+                <button type="button" class="btn btn-primary mb-3" (click)="buscarPersona()">Buscar</button>
+            </div>
+        </div>
+        <div *ngIf="mostrarForm" class="mt-4">
+            <label *ngIf="existePersona ==false" class="col-12 col-form-label text-danger">El pasajero no existe en
+                nuestra Base de Datos, complete el formulario para dar de alta</label>
+            <div class="row mb-3">
+                <label for="apellido" class="col-sm-2 col-form-label">Apellido</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="apellido" [(ngModel)]="persona.apellido" id="apellido"
+                        required #inApellido="ngModel">
+                </div>
+                <div *ngIf="inApellido.invalid && existePersona==false && (inApellido.touched || inApellido.dirty)">
+                    <p class="alert alert-danger">El campo no puede estar vacio</p>
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label for="nombre" class="col-sm-2 col-form-label">Nombres</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="nombre" [(ngModel)]="persona.nombre" id="nombre"
+                        required #inNombre="ngModel">
+                </div>
+                <div *ngIf="inNombre.invalid && existePersona==false && (inNombre.touched || inNombre.dirty)">
+                    <p class="alert alert-danger">El campo no puede estar vacio</p>
+                </div>
+            </div>
+            <div class=" row mb-3">
+                <label for="exampleInputEmail1" class="col-sm-2 col-form-label">Email</label>
+                <div class="col-sm-10">
+                    <input type="email" class="form-control" id="exampleInputEmail1" name="email"
+                        [(ngModel)]="persona.email" aria-describedby="emailHelp" required #inEmail="ngModel">
+                    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                </div>
+                <div *ngIf="inEmail.invalid && existePersona==false && (inEmail.touched || inEmail.dirty)">
+                    <p class="alert alert-danger">El campo no puede estar vacio</p>
+                </div>
+            </div>
+            <div>
+                <button *ngIf="existePersona == false" type="button" class="btn btn-primary"
+                (click)="guardarPersona()">Guardar Pasajero</button>
+            </div>
+            
+        </div>
+        <div *ngIf="editMode==false" class="col-12 col-sm-10 col-md-6">
+            <button [disabled]="sectorPasaje.invalid" type="button" class="btn btn-primary"
+                (click)="guardarPasaje()">Guardar</button>
+            <button type="button" class="btn btn-primary" (click)="volver()">Volver</button>
+        </div>
+        <div *ngIf="editMode" class="col-12 col-sm-10 col-md-6">
+            <button [disabled]="sectorPasaje.invalid" type="button" class="btn btn-primary"
+                (click)="actualizarPasaje()">Actualizar</button>
+            <button type="button" class="btn btn-primary" (click)="volver()">Volver</button>
+        </div>
+    </form>
+  
+
+</div>

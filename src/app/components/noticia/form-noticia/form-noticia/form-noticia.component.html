@@ -1,0 +1,46 @@
+<div class="row justify-content-center">
+  <div class="col-12 col-md-8 mt-4 mb-4 border-primary border-5 border-top border-bottom">
+    <h1>FORMULARIO NOTICIAS</h1>
+  </div>
+  
+  <form class="col-6" #sectorNoticia="ngForm">
+    <div class="mb-3">
+      <label for="titulo-noticia" class="form-label">Titulo</label>
+      <textarea class="form-control" required style="height: 10em;" id="titulo-noticia" 
+      name="titulo" [(ngModel)]="noticia.titulo" placeholder="Escriba su titulo aqui"
+      #inTitulo="ngModel" ></textarea>
+      <div *ngIf="inTitulo.invalid && (inTitulo.touched || inTitulo.dirty)">
+        <p class="alert alert-danger">El campo no puede estar vacio</p>
+      </div>
+        
+    </div>
+    <div class="form-floating">
+        <textarea class="form-control" required style="height: 10em;" name="noticia" 
+        [(ngModel)]="noticia.noticia" placeholder="Leave a comment here" id="floatingTextarea"
+        #inNoticia="ngModel"></textarea>
+        <label for="floatingTextarea ">Noticia</label>
+        <p *ngIf="inNoticia.invalid && (inNoticia.touched || inNoticia.dirty)" class="alert alert-danger">EL campo no puede estar vacio</p>
+      </div>
+    <form class="mb-3 mt-4">
+        <input type="file" alife-file-to-base64 multiple
+        (onFileChanged)="onFileChanges($event)"
+        accept="image/x-png,image/gif,image/jpeg"/>
+        <img  *ngIf="noticia.img!=''" width="60%" class="mt-3" [src]="noticia.img" alt="Debe cargar una imagen">
+        <p class=" alert alert-danger" *ngIf="noticia.img==''">Ingrese una Imagennnnnnnn</p>
+        
+    </form>
+   
+
+    <div class="mb-3 form-check">
+      <input type="checkbox" class="form-check-input"  name="vigente" [(ngModel)]="noticia.vigente"  id="exampleCheck1">
+      <label *ngIf="noticia.vigente" class="form-check-label" for="exampleCheck1">Vigente</label>
+      <label *ngIf="noticia.vigente == false" class="form-check-label" for="exampleCheck1">No Vigente</label>
+    </div>
+    <div class="text-center mb-4">
+      <button [disabled]="sectorNoticia.invalid" type="button" class="btn btn-primary" (click)="guardarNoticia(sectorNoticia)">Guardar</button>
+      <button type="button" class="btn btn-primary" (click)="verNoticias()">Vista Previa de Noticias</button>
+    </div>
+    
+   
+  </form>
+</div>

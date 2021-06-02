@@ -1,0 +1,79 @@
+<div class=" container">
+
+    <div class="row justify-content-center text-center">
+        <div class="col-12 col-md-8  mt-4 mb-4 border-primary border-5 border-top border-bottom">
+          <h1>HISTORIAL DE TRADUCCIONES </h1>
+        </div>
+    </div>
+
+    <form action="">
+        <div class="row">
+            <div class="col-12 col-md-4">
+                <label for="" class="form-label">Idioma Origen</label>
+                <select class="form-select" name="idiomaOrigen" [(ngModel)]="idiomaOrigen"
+                    aria-label="Default select example">
+                    <option selected>Seleccionar</option>
+                    <option value="Spanish">Español</option>
+                    <option value="English">Ingles</option>
+                    <option value="French">Frances</option>
+                    <option value="Italian">Italiano</option>
+                </select>
+            </div>
+            <div class="col-12 col-md-4">
+                <label for="" class="form-label">Idioma Destino</label>
+                <select class="form-select" name="idiomaDestino" [(ngModel)]="idiomaDestino"
+                    aria-label="Default select example">
+                    <option selected>Seleccionar</option>
+                    <option value="Spanish">Español</option>
+                    <option value="English">Ingles</option>
+                    <option value="French">Frances</option>
+                    <option value="Italian">Italiano</option>
+                </select>
+            </div>
+            <div class="col-12 col-md-4 pt-3">
+                <button class="btn-primary w-50" (click)="cargarLogs()">Filtrar</button>
+                <button class="btn-primary w-50" (click)="ngOnInit()">Refresh</button>
+            </div>
+
+        </div>
+    </form>
+
+
+
+    <table class="table table-striped border border-1" [mfData]="logs" #mf="mfDataTable" [mfRowsOnPage]="5">
+        <thead>
+            <tr>
+                <th style="width: 25%">
+                    <mfDefaultSorter by="fuente">Idioma Fuente</mfDefaultSorter>
+                </th>
+                <th style="width: 25%">
+                    <mfDefaultSorter by="textoOrigen">Texto</mfDefaultSorter>
+                </th>
+                <th style="width: 25%">
+                    <mfDefaultSorter by="target">Idioma a traducir</mfDefaultSorter>
+                </th>
+                <th style="width: 25%">
+                    <mfDefaultSorter by="traduccion">Texto Traducido</mfDefaultSorter>
+                </th>
+
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let log of mf.data">
+                <td>{{log.idiomaOrigen}}</td>
+                <td>{{log.textoOrigen}}</td>
+                <td>{{log.idiomaDestino}}</td>
+                <td>{{log.textoDestino}}</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="4">
+                    <mfBootstrapPaginator [rowsOnPageSet]="[5,10,25]"></mfBootstrapPaginator>
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <button class="btn-primary btn-lg" (click)="volver()">Regresar</button>
+</div>

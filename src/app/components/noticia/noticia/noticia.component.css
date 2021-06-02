@@ -1,0 +1,9 @@
+.fondo{
+    position: absolute;
+    bottom: 1.25rem;
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem;
+    color: white;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    background: rgba(24, 21, 21, 0.5);
+}

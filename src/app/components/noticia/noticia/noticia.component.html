@@ -1,0 +1,28 @@
+<div class="col-12 text-center mt-4 mb-4 border-primary border-5 border-top border-bottom">
+  <h1>VISTA DE PREVIA</h1>
+</div>
+
+<div id="carouselExampleCaptions" class="carousel slide container pt-5" data-bs-ride="carousel" *ngIf="noticia != null">
+
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="{{noticia.img}}" class="d-block w-100" alt="...">
+      <div class=" d-block fondo text-center ">
+        <h2><span style=" font-weight: bold;">{{noticia.titulo}}</span></h2>
+        <p>{{noticia.noticia}}</p>
+      </div>
+    </div>
+
+    <button class="carousel-control-prev" type="button" (click)="anterior()">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    </button>
+    <button class="carousel-control-next" type="button" (click)="siguiente()">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    </button>
+
+
+  </div>
+</div>
+<div class="text-end container pt-5">
+  <button type="button" class="btn-primary btn-lg " (click)="volver()">Volver</button>
+</div>
